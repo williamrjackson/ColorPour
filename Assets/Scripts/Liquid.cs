@@ -82,9 +82,9 @@ public class Liquid : MonoBehaviour
 
             // calculate color...
             Color determined = new Color(
-                redCount.Remap(0f, totalDropletCount, 0f, 1f),
-                greenCount.Remap(0f, totalDropletCount, 0f, 1f),
-                blueCount.Remap(0f, totalDropletCount, 0f, 1f)
+                Mathf.InverseLerp(0f, totalDropletCount, redCount),
+                Mathf.InverseLerp(0f, totalDropletCount, greenCount),
+                Mathf.InverseLerp(0f, totalDropletCount, blueCount)
             );
 
             // Match luminance to target. This mixing method can't produce all colors.
