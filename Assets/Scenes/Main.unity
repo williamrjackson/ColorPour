@@ -1200,7 +1200,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 994628609}
-  - component: {fileID: 994628608}
   m_Layer: 0
   m_Name: Droppers
   m_TagString: Untagged
@@ -1208,24 +1207,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &994628608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994628607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13ef28d88a8e5241b5f802fd4405b5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalCentering: 1
-  horizontalSpacing: 3
-  verticalCentering: 0
-  verticalSpacing: 0
-  depthCentering: 0
-  depthSpacing: 0
 --- !u!4 &994628609
 Transform:
   m_ObjectHideFlags: 0

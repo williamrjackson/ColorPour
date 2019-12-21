@@ -10,7 +10,7 @@ public class Droplet : MonoBehaviour
         set
         {
             _color = value;
-            transform.Color(Liquid.BaseToColor(_color), 0f);
+            GetComponent<SpriteRenderer>().color = Liquid.BaseToColor(_color);
         }
     }
     public ParticleSystem particles;

@@ -60,8 +60,13 @@ public class Liquid : MonoBehaviour
     {
         if (transform.localScale.y < targetY)
         {
-            transform.localScale = transform.localScale.With(y: transform.localScale.y + .025f);
-            transform.localPosition = transform.localPosition.With(y: transform.localScale.y * .5f);
+            Vector3 scale = transform.localScale;
+            scale.y = transform.localScale.y + .025f;
+            transform.localScale = scale;
+
+            Vector3 pos = transform.localPosition;
+            pos.y = transform.localScale.y * .5f;
+            transform.localPosition = pos;
         }
 
         if (redCount != cachedRedCount || greenCount != cachedGreenCount || blueCount != cachedBlueCount)
