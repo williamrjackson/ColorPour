@@ -12,9 +12,9 @@ public class DropperBehavior : MonoBehaviour
     {
         pourRoutine = StartCoroutine(Pour());
     }
-    void OnMouseUp()
+    void Update()
     {
-        if (pourRoutine != null)
+        if (Input.GetMouseButtonUp(0) && pourRoutine != null)
         {
             StopCoroutine(pourRoutine);
             pourRoutine = null;
