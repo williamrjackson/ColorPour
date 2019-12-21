@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public bool CheckForWin(Color currentColor)
     {
         float distance = Liquid.ColorDistance(currentColor, targetColor);
-        Debug.Log(distance);
+        // Debug.Log(distance);
         if (distance < requiredDistance)
         {
             successCanvas.gameObject.SetActive(true);
