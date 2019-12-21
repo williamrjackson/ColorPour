@@ -584,6 +584,7 @@ MonoBehaviour:
   requiredDistance: 0.1
   successCanvas: {fileID: 1726555704}
   failCanvas: {fileID: 751241923}
+  difficultyLevel: 1
 --- !u!4 &588645875
 Transform:
   m_ObjectHideFlags: 0

@@ -5,12 +5,13 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance;
-
+    public enum DifficultyLevel { Easy, Medium, Hard };
     public Color targetColor;
     public SpriteRenderer targetColorSprite;
     public float requiredDistance = .25f;
     public Transform successCanvas;
     public Transform failCanvas;
+    public DifficultyLevel difficultyLevel;
     private bool winState;
     private bool failState;
 
@@ -36,7 +37,11 @@ public class GameManager : MonoBehaviour
 
     public void SetRandomTargetColor()
     {
-        targetColor = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
+        float saturationMin = 1f;
+        if (difficultyLevel == DifficultyLevel.Medium) saturationMin = .5f;
+        else if (difficultyLevel == DifficultyLevel.Hard) saturationMin = 0f;
+
+        targetColor = Random.ColorHSV(0f, 1f, saturationMin, 1f, 1f, 1f);
         targetColorSprite.color = targetColor;
         successCanvas.gameObject.SetActive(false);
         failCanvas.gameObject.SetActive(false);
