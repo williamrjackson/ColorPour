@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class Droplet : MonoBehaviour
 {
-    public LiquidBase color = LiquidBase.Blue;
+    private LiquidBase _color;
+    public LiquidBase color
+    {
+        set
+        {
+            _color = value;
+            transform.Color(Liquid.BaseToColor(_color), 0f);
+        }
+    }
+    public ParticleSystem particles;
+    private ParticleSystem.MainModule main;
     void Start()
     {
+        main = particles.main;
         StartCoroutine(ContributeAndDie());
     }
 
     // Update is called once per frame
     IEnumerator ContributeAndDie()
     {
-        yield return new WaitForSeconds(1f);
-        Liquid.instance.Add(color);
+        main.startColor = Liquid.BaseToColor(_color);
+        yield return new WaitForSeconds(1.25f);
+        Liquid.instance.Add(_color);
         Destroy(gameObject);
     }
 }

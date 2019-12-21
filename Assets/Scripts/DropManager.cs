@@ -16,7 +16,6 @@ public class DropManager : MonoBehaviour
         Droplet newDroplet = Instantiate(dropletTemplate);
         newDroplet.name = "Droplet";
         newDroplet.transform.position = worldPos;
-        newDroplet.transform.Color(Liquid.BaseToColor(color), 0f);
         newDroplet.color = color;
         newDroplet.gameObject.SetActive(true);
     }
