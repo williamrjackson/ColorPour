@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void SetRandomTargetColor()
     {
-        targetColor = Random.ColorHSV(0f, 1f, 0f, 1f, .5f, 1f);
+        targetColor = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
         targetColorSprite.color = targetColor;
         successCanvas.gameObject.SetActive(false);
         failCanvas.gameObject.SetActive(false);
@@ -59,17 +59,14 @@ public class GameManager : MonoBehaviour
 
     public bool CheckForWin(Color currentColor)
     {
-        float distance = Vector3.Distance(new Vector3(currentColor.r, currentColor.g, currentColor.b), new Vector3(targetColor.r, targetColor.g, targetColor.b));
-        Debug.Log(currentColor.ToString() + " vs " + targetColor.ToString());
+        float distance = Liquid.ColorDistance(currentColor, targetColor);
         Debug.Log(distance);
         if (distance < requiredDistance)
         {
-            Debug.Log("WIN!!!");
             successCanvas.gameObject.SetActive(true);
             winState = true;
-            return true;
         }
-        return false;
+        return winState;
     }
 
     public bool WinState

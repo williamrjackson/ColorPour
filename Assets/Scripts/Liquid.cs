@@ -25,6 +25,12 @@ public class Liquid : MonoBehaviour
         }
     }
 
+
+    public static float ColorDistance(Color color1, Color color2)
+    {
+        return Vector3.Distance(new Vector3(color1.r, color1.g, color1.b), new Vector3(color2.r, color2.g, color2.b));
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -43,6 +49,13 @@ public class Liquid : MonoBehaviour
         GameManager.instance.SetRandomTargetColor();
     }
 
+    private int redCount = 0;
+    private int greenCount = 0;
+    private int blueCount = 0;
+    private int cachedRedCount = 0;
+    private int cachedGreenCount = 0;
+    private int cachedBlueCount = 0;
+
     void Update()
     {
         if (transform.localScale.y < targetY)
@@ -53,22 +66,34 @@ public class Liquid : MonoBehaviour
 
         if (redCount != cachedRedCount || greenCount != cachedGreenCount || blueCount != cachedBlueCount)
         {
+            // update cache values
+            cachedRedCount = redCount;
+            cachedBlueCount = blueCount;
+            cachedGreenCount = greenCount;
+
             int totalDropletCount = redCount + greenCount + blueCount;
 
+            // Game over if it overflows
             if (totalDropletCount > 82)
             {
                 GameManager.instance.FailState = true;
+                return;
             }
+
             // calculate color...
             Color determined = new Color(
                 redCount.Remap(0f, totalDropletCount, 0f, 1f),
                 greenCount.Remap(0f, totalDropletCount, 0f, 1f),
                 blueCount.Remap(0f, totalDropletCount, 0f, 1f)
             );
+
+            // Match luminance to target. This mixing method can't produce all colors.
+            // Considering making this a "light value" that the player can adjust.
             float H;
             float S;
             float V;
             Color.RGBToHSV(determined, out H, out S, out V);
+
             V = GameManager.instance.TargetLuminance;
             determined = Color.HSVToRGB(H, S, V);
             if (GameManager.instance.CheckForWin(determined))
@@ -76,20 +101,8 @@ public class Liquid : MonoBehaviour
                 sprite.color = GameManager.instance.targetColor;
             }
             sprite.color = determined;
-
-            // update cache values
-            cachedRedCount = redCount;
-            cachedBlueCount = blueCount;
-            cachedGreenCount = greenCount;
         }
     }
-
-    private int redCount = 0;
-    private int greenCount = 0;
-    private int blueCount = 0;
-    private int cachedRedCount = 0;
-    private int cachedGreenCount = 0;
-    private int cachedBlueCount = 0;
 
     // Update is called once per frame
     public void Add(LiquidBase liquidBase)

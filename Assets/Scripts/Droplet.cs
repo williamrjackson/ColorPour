@@ -13,9 +13,8 @@ public class Droplet : MonoBehaviour
     // Update is called once per frame
     IEnumerator ContributeAndDie()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
         Liquid.instance.Add(color);
-        yield return new WaitForSeconds(.5f);
         Destroy(gameObject);
     }
 }

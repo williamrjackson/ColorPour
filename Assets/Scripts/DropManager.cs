@@ -11,7 +11,6 @@ public class DropManager : MonoBehaviour
         dropletTemplate.gameObject.SetActive(false);
     }
 
-
     public void Drop(LiquidBase color, Vector3 worldPos)
     {
         Droplet newDroplet = Instantiate(dropletTemplate);
@@ -20,6 +19,5 @@ public class DropManager : MonoBehaviour
         newDroplet.transform.Color(Liquid.BaseToColor(color), 0f);
         newDroplet.color = color;
         newDroplet.gameObject.SetActive(true);
-        Rigidbody2D rb = newDroplet.GetComponent<Rigidbody2D>();
     }
 }
