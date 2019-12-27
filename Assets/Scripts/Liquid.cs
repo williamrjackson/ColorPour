@@ -43,6 +43,13 @@ public class Liquid : MonoBehaviour
         return Vector3.Distance(new Vector3(color1.r, color1.g, color1.b), new Vector3(color2.r, color2.g, color2.b));
     }
 
+    public Color CurrentBlendColor
+    {
+        get
+        {
+            return sprite.color;
+        }
+    }
     void Start()
     {
         targetY = transform.localScale.y;
@@ -86,7 +93,7 @@ public class Liquid : MonoBehaviour
             int totalDropletCount = redCount + greenCount + blueCount;
 
             // Game over if it overflows
-            if (totalDropletCount > 82)
+            if (totalDropletCount > 70)
             {
                 GameManager.instance.FailState = true;
                 return;

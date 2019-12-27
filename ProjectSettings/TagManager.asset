@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Basin
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Above
+    uniqueID: 3314242447
+    locked: 0
+  - name: Below
+    uniqueID: 2669396839
     locked: 0

@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator BannerLatch()
     {
         _bannerLatch = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         _bannerLatch = false;
     }
 
