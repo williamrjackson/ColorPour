@@ -6,8 +6,10 @@ public class Droplet : MonoBehaviour
 {
     private LiquidBase _color;
     public Rigidbody2D thisRigidBody;
+    public bool wiggle;
 
     private SpriteRenderer spriteRen;
+    private Vector3 initialScale;
     private Coroutine coro;
     private bool _keepUpToDate = false;
     // When color is set, update the sprite and particle system color.
@@ -27,7 +29,8 @@ public class Droplet : MonoBehaviour
             spriteRen.color = Liquid.instance.CurrentBlendColor;
         }
 
-        transform.localScale = new Vector3(Random.Range(1f, 1.05f), Random.Range(1f, 1.05f), 1f);
+        if (wiggle)
+            transform.localScale = initialScale * Random.Range(1f, 1.05f);
 
     }
 
@@ -42,6 +45,7 @@ public class Droplet : MonoBehaviour
         {
             thisRigidBody = GetComponent<Rigidbody2D>();
         }
+        initialScale = transform.localScale;
         thisRigidBody.AddForce(Vector2.right * Random.Range(-2f, 2f));
         StartCoroutine(ContributeColor());
     }
@@ -55,8 +59,16 @@ public class Droplet : MonoBehaviour
     // Wait a bit for the droplet to fall, then add to the liquid and destroy self
     IEnumerator ContributeColor()
     {
+        if (Liquid.instance == null)
+        {
+            Debug.Log("Null Liquid");
+            yield break;
+        }
+
         yield return new WaitForSeconds(1f);
+
         Liquid.instance.Add(_color);
+
         float elapsedTime = 0f;
         float duration = .5f;
         Color initColor = spriteRen.color;
